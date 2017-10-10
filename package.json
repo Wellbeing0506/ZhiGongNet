@@ -1,11 +1,10 @@
 {
-  "name": "tanadataweb",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "NODE_ENV=production node server.js",
-    "dev": "NODE_ENV=development node server.js",
-    "mac": "NODE_ENV=devmac node server.js"
+  "name": "zhigongnet",
+  "version": "1.0.0",
+  "description": "ZhiGongNet",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -27,23 +26,23 @@
     "serve-favicon": "^2.4.3",
     "tracer": "^0.8.11"
   },
-  "description": "TaNaData",
-  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "dev": "NODE_ENV=development node server.js",
+    "mac": "NODE_ENV=devmac node server.js"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Wellbeing0506/TaNaData.git"
+    "url": "git+https://github.com/Wellbeing0506/ZhiGongNet.git"
   },
   "keywords": [
-    "opensfhit",
-    "nodejs",
-    "zhigongnet",
-    "redis",
-    "idustry"
+    "ZhiGongNet"
   ],
   "author": "Dave",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Wellbeing0506/TaNaData/issues"
+    "url": "https://github.com/Wellbeing0506/ZhiGongNet/issues"
   },
-  "homepage": "https://github.com/Wellbeing0506/TaNaData#readme"
+  "homepage": "https://github.com/Wellbeing0506/ZhiGongNet#readme"
 }
