@@ -200,7 +200,17 @@ router.post('/updateProfile',function(req,res){
 /* message */
 router.post('/message',function(req,res){
 	console.log(req.body);
-	res.send({message:"success",data:"OK"});
+	var now=moment().format('YYYY-MM-DD h:mm:ss');
+	req.body["time"] = now;
+	client.LPUSH(config.redis.keyHead+"_Message",JSON.stringify(req.body),function(err,result){
+		if(err) {
+		console.log("message fail",err);
+		res.send({message:"fail",data:err});
+
+		} else {
+		res.send({message:"success",data:"OK"});
+		}
+	});	
 });
 
 /* logout */ 
