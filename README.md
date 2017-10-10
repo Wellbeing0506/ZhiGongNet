@@ -1,5 +1,5 @@
-# TaNaData
-TaNaData
+# ZhiGongNet
+ZhiGongNet
 
 Based on nodejs, cassandra, and redis for Openshift
 
