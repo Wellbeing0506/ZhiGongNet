@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<% include includes/head %>
+	</head>
+	<body>
+
+
+<% include includes/topbar %>
+<div class="row callout training-callout small-up-1 medium-up-4 large-up-6">
+<% if (message.length > 0) { %>
+  <div class="callout alert"><%= message %></div>
+<% } %>
+<h4 class="text-center">登入</h4>
+<hr>
+<form action="/login" method="POST">
+  <h4 class="text-center"></h4>
+  <label>
+    帐号 <input type="text" placeholder="username" name="username">
+  </label>
+  <label>
+    密码<input type="password" placeholder="password" name="password">
+  </label>
+	验证码 : <img src="/captcha.png"/><input type="text" placeholder="" name="vcode">
+  <!--input type="checkbox" name="remember" value="yes">Remember Me --!>
+  <br>
+  <button type="submit" class="button expanded">登入</button>
+</form>
+
+
+</div>
+
+
+
+
+<% include includes/js %>
+<% include includes/foundation %>
+<script>
+$("[data-menu-underline-from-center] a").addClass("underline-from-center");
+</script>
+
+
+	</body>
+</html> 

@@ -1,0 +1,49 @@
+{
+  "name": "tanadataweb",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "dev": "NODE_ENV=development node server.js",
+    "mac": "NODE_ENV=devmac node server.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "captchapng": "0.0.1",
+    "cheerio": "^1.0.0-rc.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "ejs": "~2.5.6",
+    "express": "~4.15.2",
+    "express-session": "^1.15.6",
+    "helmet": "^3.8.2",
+    "moment": "^2.18.1",
+    "morgan": "~1.8.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "redis": "^2.8.0",
+    "request": "^2.83.0",
+    "serve-favicon": "^2.4.3",
+    "tracer": "^0.8.11"
+  },
+  "description": "TaNaData",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wellbeing0506/TaNaData.git"
+  },
+  "keywords": [
+    "opensfhit",
+    "nodejs",
+    "zhigongnet",
+    "redis",
+    "idustry"
+  ],
+  "author": "Dave",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wellbeing0506/TaNaData/issues"
+  },
+  "homepage": "https://github.com/Wellbeing0506/TaNaData#readme"
+}

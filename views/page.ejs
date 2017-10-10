@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<% include includes/head %>
+    <style>
+      .truncate {
+          width: 250px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+    </style>
+	</head>
+	<body>
+<% include includes/topbar %>
+   <% if(Object.keys(videoList).length > 0) { %> 
+			<div class="row callout training-callout small-up-1 medium-up-2 large-up-3">
+   			<h3><%= nameList[thisType] %></h3>
+				<div class="column card">
+        <% Object.keys(videoList).forEach(function(j,e) { %> 
+					<div class="card-section">
+						<div align="center">
+              <a href="/each/<%= thisType %>/<%= j %>"><img src="https://vthumb.ykimg.com/vi/<%= j %>==/89/default.jpg"></img></a>
+						</div>
+					</div>
+					<div class="card-section">
+								<h4 align="center"><a href="/each/<%= thisType %>/<%= j %>"><%= videoList[j]["name"] %></a></h4>
+								<hr>
+								<p class="text-truncate truncate"><%= videoList[j]["description"] %>  </p>
+					</div>
+				<% }) %>
+				</div>
+			</div>
+    <% } else { %>
+			<div class="row callout training-callout small-up-1 medium-up-2 large-up-3">
+   			<h3><%= nameList[thisType] %></h3>
+        <p> 没有视频 </p>
+      </div>
+    <% } %>
+
+<% include includes/footer %>
+<% include includes/js %>
+<% include includes/foundation %>
+<script>
+$("[data-menu-underline-from-center] a").addClass("underline-from-center");
+</script>
+
+
+	</body>
+</html> 

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+	<head>
+		<% include includes/head %>
+    <style>
+      .truncate {
+          width: 250px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+    </style>
+	</head>
+	<body>
+<% include includes/topbar %>
+	<div class="callout primary">
+		<div class="row column">
+			<h1>欢迎来到智工网!!!</h1>
+			<p class="lead">面向智能硬件制造行业专业的技术学习平台</p>
+		</div>
+	</div>
+	
+	<% for (var i in nameList) { %>
+		<% if(videoList[i]) { %>
+			<div class="row callout training-callout small-up-1 medium-up-2 large-up-3">
+   			<h3><a href="/page/<%= i %>"><%= nameList[i] %>... </a></h3>
+				<div class="column card">
+        <% Object.keys(videoList[i]).forEach(function(j,e) { %> 
+          <% if(e < 3) { %>
+					<div class="card-section">
+						<div align="center">
+              <a href="/each/<%= i %>/<%= j %>"><img src="https://vthumb.ykimg.com/vi/<%= j %>==/89/default.jpg"></img></a>
+						</div>
+					</div>
+					<div class="card-section">
+						<h4 align="center"><a href="/each/<%= i %>/<%= j %>"><%= videoList[i][j]["name"] %></a></h4>
+						<hr>
+						<p class="text-truncate truncate"><%= videoList[i][j]["description"] %>  </p>
+					</div>
+        	<% } %>
+				<% }) %>
+				</div>
+			</div>
+		<% }  %>
+	<% } %>
+
+<% include includes/footer %>
+<% include includes/js %>
+<% include includes/foundation %>
+<script>
+$("[data-menu-underline-from-center] a").addClass("underline-from-center");
+</script>
+
+
+	</body>
+</html> 

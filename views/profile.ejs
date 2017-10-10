@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+	<head>
+		<% include includes/head %>
+	</head>
+	<body>
+<% include includes/topbar %>
+<div class="row callout training-callout small-up-1 medium-up-4 large-up-6">
+<h4 class="text-center">帐号资讯</h4>
+<hr>
+  <h4 class="text-center"></h4>
+  <label>
+    帐号 <input type="text" placeholder="<%= userList.username %>" name="username" value="<%= userList.name %>" readonly>
+  </label>
+  <label>
+    密码 <button onclick="confirmPassword()" class="button expanded">密码更新</button>
+  </label>
+  <label>
+    电邮 <input type="text" id="email" placeholder="<%= userList.email %>" name="email" value="<%= userList.email %>" >
+  </label>
+  <label>
+    电话 <input type="text" id="phone" placeholder="<%= userList.phone %>" name="email" value="<%= userList.phone %>" >
+  </label>
+  <br>
+  <button onclick="updateProfile()" class="button expanded">更新</button>
+</div>
+
+
+
+
+
+
+<script>
+	function updateProfile(){
+		var username = "<%= userList.username %>";
+		var email = $("#email").val();
+		var phone = $("#phone").val();
+		$.ajax({
+			url : "/updateProfile",
+			type : "POST",
+			data : {useranme : username,email:email,phone:phone},
+			success : function(data) {
+				console.log(data);
+				window.location.reload(true);
+			}, 
+      error : function(XMLHttpRequest, textStatus, errorThrown) { 
+        alert("Status: " + textStatus,"Error"+errorThrown);
+      }
+		});
+	}	
+	function confirmPassword(){
+	}
+</script>
+
+
+<% include includes/js %>
+<% include includes/foundation %>
+
+	</body>
+</html> 

@@ -1,0 +1,66 @@
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+	<div class="off-canvas position-bottom" id="my-info" data-off-canvas data-position="left">
+		<div class="row column">
+			<br>
+			<h5>智工網</h5>
+			<div class="row small-up-2 medium-up-3 large-up-4">
+        <% for (var i in nameList) { %>
+          <a href="/page/<%= i %>"><%= nameList[i] %></a></li>
+        <% } %>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="top-bar foundation-5-top-bar">
+  <div class="top-bar-title">
+    <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle></button>
+    </span>
+  </div>
+  <div id="responsive-menu">
+    <div class="top-bar-left">
+      <ul class="dropdown vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown" data-auto-height="true" data-animate-height="true">
+        <li class="title-bar-title"><a href="/">智工網</a></li>
+        <li>
+          <a href="#"><img class="svg" src="/images/fi-database.svg" data-open="my-info" style="height:25px;width:25px"></img>教学分类</a>
+          <ul class="menu">
+            <% for (var i in nameList) { %>
+              <li><a href="/page/<%= i %>"><%= nameList[i] %></a></li>
+            <% } %>
+          </ul>
+        </li>
+        <% if(user.username === "admin") { %>
+        <li><a href="#">管理后台</a>
+				<ul class="menu">
+					<li><a href="/userManagement">帐号管理</a></li>
+					<li><a href="/videoManagement">视频管理</a></li>
+					<li><a href="/videoManagement">信息管理</a></li>
+				</ul>
+				</li>
+        <% } %>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="dropdown vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown" data-auto-height="true" data-animate-height="true">
+      <% if(user.username==="") { %>
+		    <li><a href="/login"><img class="svg" src="/images/fi-torso.svg" style="height:25px;width:25px"></img>登入</a></li>
+      <% } else { %>
+		    <li><a href="/profile"><img class="svg" src="/images/fi-torso.svg" style="height:25px;width:25px"></img><%= user.username %></a>
+         <ul class="menu">
+          <li><a href="/logout"><img src="/images/exit.png" style="height:25px;width:25px"></img>登出</a></li>
+        </ul>
+        </li>
+      <% } %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+        <!--li><input type="search" placeholder="Search"></li>
+        <li><button type="button" class="button">Search</button></li--!>
+
+

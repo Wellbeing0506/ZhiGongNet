@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+		<% include includes/head %>
+    <style>
+      .truncate {
+          width: 250px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+    </style>
+	</head>
+	<body>
+<% include includes/topbar %>
+			<div class="row callout training-callout small-up-12 medium-up-8 large-up-9">
+								<h4 align="center"><%= videoList["name"] %></h4>
+ 			     <div class="responsive-embed"><embed class="row" src="http://player.youku.com/player.php/sid/<%= id %>>/v.swf" quality="high" align="center" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed></div>
+								<hr>
+								<p><%= videoList["description"] %>  </p>
+					</div>
+
+<% include includes/footer %>
+<% include includes/js %>
+<% include includes/foundation %>
+<script>
+$("[data-menu-underline-from-center] a").addClass("underline-from-center");
+</script>
+
+
+	</body>
+</html> 
