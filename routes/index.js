@@ -8,18 +8,13 @@ var events = require('events');
 var Config = require('../config/sysConfig'),
     config = new Config();
 var redis = require('redis');
-redis.debug_mode = true;
 var client = redis.createClient(config.redis.port,config.redis.ip,config.redis.option);
-
-
-const url = require('url');
 
 var list = {};
 router.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
-
 
 /* remove Video */
 router.post("/videoDelete",function(req,res){
@@ -192,12 +187,20 @@ router.get('/profile',isLoggedIn,function(req,res){
 	});
 });
 router.post('/updateProfile',function(req,res){
-	console.log(req.body);
-	client.HMSET(config.redis.keyHead+"_User_"+req.body.username,{phone:req.body.phone},function(err,result){
-//	client.HMSET(config.redis.keyHead+"_User_"+req.body.username,"email",req.body.email,"phone",req.body.phone,function(err,result){
-		console.log(result,err);
-		res.send({message:"success",data:"ok"});	
+	var phone = req.body.phone;
+	var email = req.body.email;
+	var username = req.body.username;
+	client.HMSET(config.redis.keyHead+"_User_"+username,"phone",phone,"email",email,function(err,result){
+		if(err){
+			console.log("update Profile",err);
+		}
 	});
+});
+
+/* message */
+router.post('/message',function(req,res){
+	console.log(req.body);
+	res.send({message:"success",data:"OK"});
 });
 
 /* logout */ 

@@ -1,6 +1,5 @@
 <br>
 <hr>
-
 	<div class="row">
     <div class="medium-6 columns">
       <h3>联系我们</h3>
@@ -11,16 +10,41 @@
     </div>
     <div class="medium-6 columns">
       <label>姓名
-        <input type="text" placeholder="Name">
+        <input type="text" placeholder="Name" id="name">
+      </label>
+      <label>电话
+        <input type="text" placeholder="Phone" id="phone">
       </label>
       <label>电邮
-        <input type="text" placeholder="Email">
+        <input type="text" placeholder="Email" id="email">
       </label>
       <label>
         信息
-        <textarea placeholder="holla at a designerd"></textarea>
+        <textarea placeholder="holla at a designerd" id="message"></textarea>
       </label>
-      <input type="submit" class="button expanded" value="提交">
+      <input onclick="submit()" type="submit" class="button expanded" value="提交">
     </div>
   </div>
 
+<script>
+function submit(){
+	var name = $("#name").val();
+	var phone = $("#name").val();
+	var email = $("#email").val();
+	var message = $("#message").val();
+	console.log(name,phone,email,message);
+  $.ajax({
+    url : "/message",
+    type : "POST",
+    data : {name : name,email:email,phone:phone,message:message},
+    success : function(data) {
+      console.log(data);
+      window.location.reload(true);
+    }, 
+    error : function(XMLHttpRequest, textStatus, errorThrown) { 
+      alert("Status: " + textStatus,"Error"+errorThrown);
+    }
+  });
+
+}
+</script>
