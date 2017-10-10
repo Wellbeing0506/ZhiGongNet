@@ -35,9 +35,9 @@ npm run mac
   password:"UserPasswordWithSaltHash", 
   salt : "saltByTimeHash"
   createdTime:"2017-10-06 00:00:00", 
-  email:"UserEmail@mail.com, 
+  email:"UserEmail@mail.com", 
   phone:"UserPhoneNumber", 
-  deposit : "",
+  deposit : 0,
   role :"admin/user"
 }
 ```
@@ -48,13 +48,13 @@ npm run mac
 ```
 
   - ZhiGongNet_Video_videoID1 : Hash Type
-```json
+```javascript
 {
   name : "videoTitle",
   description : "videoDescription",
   creater : "whoAdd",
   createdTime : "2017-10-06 00:00:00",
-  sourceFrom : "youKu"
+  sourceFrom : "YouKu"
 }
 ```
 
