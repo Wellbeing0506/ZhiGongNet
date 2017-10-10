@@ -9,7 +9,7 @@ module.exports = function(){
 			}};
 	} else if (process.env.NODE_ENV==='production') {
 			return {redis : {
-				ip : "172.30.115.242",
+				ip : "172.31.23.229",
 				port : 6379,
 				option : {auth_pass:'qwe123QWE!@#'},
 				keyHead : "ZhiGongNet"

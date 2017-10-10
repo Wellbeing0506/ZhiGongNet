@@ -8,7 +8,9 @@ var events = require('events');
 var Config = require('../config/sysConfig'),
     config = new Config();
 var redis = require('redis');
+redis.debug_mode = true;
 var client = redis.createClient(config.redis.port,config.redis.ip,config.redis.option);
+
 
 const url = require('url');
 
