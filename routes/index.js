@@ -199,7 +199,6 @@ router.post('/updateProfile',function(req,res){
 
 /* message */
 router.post('/message',function(req,res){
-	console.log(req.body);
 	var now=moment().format('YYYY-MM-DD h:mm:ss');
 	req.body["time"] = now;
 	client.LPUSH(config.redis.keyHead+"_Message",JSON.stringify(req.body),function(err,result){
