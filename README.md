@@ -3,6 +3,8 @@ ZhiGongNet
 
 Based on nodejs, cassandra, and redis for Openshift
 
+demo : http://formal-zhigongnet.a3c1.starter-us-west-1.openshiftapps.com
+
 ### Run Server 
 for Developement 
 ```
