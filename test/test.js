@@ -4,7 +4,9 @@ var crypto = require('crypto');
 var salt = "81324230-aafa-11e7-94b3-fbe9fca57371";
 var password = "ttt"
 var p = crypto.createHash('sha1').update(salt+password).digest('hex');
-console.log(p);
+var sss = "63e4a302-d6ef-4c98-acec-d8b4eb2c504a";
+var pass = "qqq";
+console.log(crypto.createHash('sha1').update(sss+pass).digest('hex'));
 
 
 /*

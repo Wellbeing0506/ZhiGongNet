@@ -5,6 +5,7 @@ var Passport = require('passport');
 var captchapng = require('captchapng');
 var moment = require('moment');
 var events = require('events');
+var crypto = require('crypto');
 var Config = require('../config/sysConfig'),
     config = new Config();
 var redis = require('redis');
@@ -18,8 +19,10 @@ router.all('*', function(req, res, next) {
 
 /* remove Video */
 router.post("/videoDelete",function(req,res){
+	console.log(list);
 	client.SREM(config.redis.keyHead+"_Category_"+req.body.removeType,req.body.removeVideo,function(err,result){
 		client.DEL(config.redis.keyHead+"_Video_"+req.body.removeVideo,function(err1,result1){
+			
 			res.send({message:"success",data:req.body,result:result,result1,result1});
 		});
 	});
@@ -89,7 +92,6 @@ router.get("/page/:type",function(req,res){
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	list = {};
 	var proxy = new events.EventEmitter();
 	proxy.setMaxListeners(0);	
 	var count = 0;
@@ -98,6 +100,7 @@ router.get('/', function(req, res) {
 	proxy.on("final",function(message){
 		final_count++;	
 		if( final_count> 1 && final_count === Object.keys(nameList).length) {
+			console.log("list",list);
   		if(req.session.passport){
 	  		res.render('index.ejs',{nameList:nameList,user:req.session.passport.user, videoList : list});
   		}else{
@@ -148,6 +151,45 @@ router.get('/', function(req, res) {
 	});
 });
 
+/* Signup page */
+router.get('/signup',function(req,res){
+      res.render('signup.ejs',{message:req.flash('LoginMessage'),nameList:nameList,user:{username:"",role:""}});
+});
+router.post('/signup',function(req,res){
+			var now=moment().format('YYYY-MM-DD h:mm:ss');	
+			var uuidv4 = require('uuid/v4');
+			var salt = uuidv4();	
+			var realPassword = crypto.createHash('sha1').update(salt+req.body.password).digest('hex');
+			client.SADD(config.redis.keyHead+"_Users",req.body.username,function(err,result) {
+				if(err) {
+					console.log("err",err);
+      		res.render('login.ejs',{message:req.flash('LoginMessage'),nameList:nameList,user:{username:"",role:""}});
+				} else {
+					var params = {
+						"username" : req.body.username,
+						"salt" : salt,
+						"password" : realPassword,
+						"email":req.body.email,
+						"phone":req.body.phone,
+						"role" : "user",
+						"deposite" : 0
+					};
+					client.HMSET(config.redis.keyHead+"_User_"+req.body.username,params,function(err,result){
+      		res.render('login.ejs',{message:req.flash('LoginMessage'),nameList:nameList,user:{username:"",role:""}});
+					});
+				}
+			});
+});
+/* account check */ 
+router.post('/account',function(req,res){
+	client.SMEMBERS(config.redis.keyHead+"_Users",function(err,result){
+		if( result.indexOf(req.body.username) === 0 ) {
+			res.send({message:"existed",data:req.body.username});	
+		} else {
+			res.send({message:"success",data:req.body.username});	
+		}
+	});
+});
 
 /* login page */
 router.get('/login',function(req,res) {
@@ -286,7 +328,6 @@ router.get('/videoList/:type',function(req,res){
 	var proxy = new events.EventEmitter();
 	proxy.setMaxListeners(0);	
 	var count = 0;
-	var list = {};
 	proxy.on("detail",function(message,item,detail,each,len){
 		count = (message === "success") ? count+1 : count;	
 		list[item] = detail;

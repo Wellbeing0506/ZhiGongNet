@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+	<head>
+		<% include includes/head %>
+	</head>
+	<body>
+
+
+<% include includes/topbar %>
+<div class="row callout training-callout small-up-1 medium-up-4 large-up-6">
+<% if (message.length > 0) { %>
+  <div class="callout alert"><%= message %></div>
+<% } %>
+<h4 class="text-center">帐号注册</h4>
+<hr>
+<form action="/signup" method="POST" data-abide id="singupForm" novalidate>
+  <h4 class="text-center"></h4>
+  <div data-abide-error class="alert callout" style="display: none;">
+    <p><i class="fi-alert"></i> There are some errors in your form.</p>
+  </div>
+  <label>
+    帐号 <input type="text" placeholder="username" name="username" id="username" required>
+  </label>
+      <label>Password Required
+        <input type="password" id="password" name="password" placeholder="yeti4preZ" aria-describedby="exampleHelpText" required >
+        <span class="form-error">
+          I'm required!
+        </span>
+      </label>
+      <p class="help-text" id="exampleHelpText">Enter a password please.</p>
+      <label>Re-enter Password
+        <input type="password" placeholder="yeti4preZ" aria-describedby="exampleHelpText2" required data-equalto="password">
+        <span class="form-error">
+          Hey, passwords are supposed to match!
+        </span>
+      </label>
+      <p class="help-text" id="exampleHelpText2">This field is using the `data-equalto="password"` attribute, causing it to match the password field above.</p>
+  <label>
+    联络电邮<input type="text" placeholder="email" name="email">
+  </label>
+  <label>
+    联络电话<input type="text" placeholder="phone" name="phone">
+  </label>
+  <!--input type="checkbox" name="remember" value="yes">Remember Me --!>
+  <br>
+  <button type="submit" class="button expanded" id="signup">注册</button>
+</form>
+
+
+</div>
+
+
+
+
+<% include includes/js %>
+<script>
+$("[data-menu-underline-from-center] a").addClass("underline-from-center");
+$(document).foundation();
+$("#username").on("valid.zf.abide",function(e,i){
+	$.ajax({
+		url : "/account",
+		type : "POST",
+		data : {username:$("#username").val()},
+		success : function(data){
+			console.log(data);
+			if(data.message === "existed") {
+				$('#singupForm').foundation('resetForm');
+				  alert("帐号已经存在，请重新输入!!!");
+			} 
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) { 
+			alert("Status: " + textStatus,"Error"+errorThrown);
+		}
+	});
+});
+</script>
+	</body>
+</html> 
